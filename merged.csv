@@ -1,0 +1,30 @@
+import csv
+
+dataset_1= []
+dataset_2= []
+
+with open("bright_stars.csv","r")as f:
+ csvreader=csv.reader(f)
+ for row in csvreader:
+  dataset_1.append(row)
+
+with open("brown_dwarfs.csv","r")as f:
+ csvreader=csv.reader(f)
+ for row in csvreader:
+  dataset_2.append(row)
+
+headers_1 = dataset_1[0]
+s_1 = dataset_1[1:]
+
+headers_2 = dataset_2[0]
+s_2 = dataset_2[1:]
+
+headers = headers_1+headers_2
+s = []
+for index, data_row in enumerate(s_1):
+ s.append(s_1[index] + s_2[index])
+
+with open("final.csv","a+")as f:
+ csvwriter = csv.writer(f)
+ csvwriter.writerow(headers)
+ csvwriter.writerows(s)
